@@ -69,16 +69,16 @@
   set numberwidth=5      " width of line numbers
   set antialias          " MacVim: smooth fonts
   set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
-  set showbreak=↪
   set fillchars=diff:⣿,vert:│
+  "set showbreak=↪
 
   set nobackup
   set noswapfile
 
-  if has('conceal')
-    set conceallevel=1
-    set listchars+=conceal:Δ
-  endif
+  " if has('conceal')
+  "   set conceallevel=1
+  "   set listchars+=conceal:Δ
+  " endif
 
   if s:is_macvim
     set guifont=Sauce\ Code\ Powerline:h13
@@ -119,7 +119,8 @@
   set clipboard+=unnamed " Yanks go on clipboard instead.
   set autowrite          " Writes on make/shell commands
   set timeoutlen=250     " Time to wait for a command (after leader for example)
-  set foldlevelstart=99  " Remove folds
+  set foldlevel=0        " enable folding
+  set foldlevelstart=99  " Open all folds on start
   set formatoptions=crql
 
   set ignorecase         " Case insensitive search
@@ -215,10 +216,11 @@
   Plug 'tpope/vim-ragtag'
   Plug 'tpope/vim-dispatch'
   Plug 'vim-ruby/vim-ruby'
-  Plug 'jiangmiao/auto-pairs'
+  Plug 'jiangmiao/auto-pairs' "{{{
+    au FileType markdown let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"'}
+    au Filetype vim      let b:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'"}
+  "}}}
 
-  Plug 'tpope/vim-markdown'
-  Plug 'nelstrom/vim-markdown-folding'
   Plug 'mxw/vim-jsx'
   Plug 'elzr/vim-json'
   Plug 'tpope/vim-cucumber'
@@ -318,6 +320,11 @@
   Plug 'junegunn/limelight.vim' "{{{
     let g:limelight_default_coefficient = 0.7
   "}}}
+  
+  " vim-orgmode setup; needs python
+  "Plug 'jceb/vim-orgmode'
+  "Plug 'vim-scripts/utl.vim'
+  "Plug 'vim-scripts/SyntaxRange' " @begin=c@ ... @end=c@
 
 " }}}
 
@@ -466,6 +473,8 @@
     "let g:goldenview__enable_at_startup = 0
     let g:goldenview__enable_default_mapping = 0
     nmap <leader>v <Plug>ToggleGoldenViewAutoResize
+    " dont resize markdown :Toc window
+    let g:goldenview__ignore_urule = { 'bufname': ['\[Location List\]'] }
   "}}}
 "}}}
 
@@ -475,7 +484,7 @@
   Plug 'tpope/vim-unimpaired'       "pairs of handy bracket mappings
   Plug 'tpope/vim-repeat'           "enable repeating supported plugin
 
-  Plug 'godlygeek/tabular', { 'on': 'Tabularize' } "{{{
+  Plug 'godlygeek/tabular' "{{{
     nmap <leader>t= :Tabularize /=<CR>
     vmap <leader>t= :Tabularize /=<CR>
     nmap <leader>t: :Tabularize /:\zs<CR>
@@ -484,6 +493,11 @@
     vmap <leader>t, :Tabularize /,\zs<CR>
     nmap <leader>tt :Tabularize /=>\zs<CR>
     vmap <leader>tt :Tabularize /=>\zs<CR>
+  "}}}
+  Plug 'plasticboy/vim-markdown' "{{{
+    let g:vim_markdown_toc_autofit = 0
+    let g:vim_markdown_emphasis_multiline = 0
+    let g:vim_markdown_new_list_item_indent = 2
   "}}}
 
   Plug 'justinmk/vim-sneak' "{{{

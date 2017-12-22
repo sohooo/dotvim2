@@ -4,8 +4,8 @@ This setup is based on various sources all around github. Huge credits go to the
 
 - [bling.vim](https://github.com/bling/dotvim)
 - [spf13-vim](https://github.com/spf13/spf13-vim)
-* [mutewinter's dotvim](https://github.com/mutewinter/dot_vim)
-* [skwp's dotfiles](https://github.com/skwp/dotfiles)
+- [mutewinter's dotvim](https://github.com/mutewinter/dot_vim)
+- [skwp's dotfiles](https://github.com/skwp/dotfiles)
 
 
 ## Features
