@@ -166,7 +166,9 @@
   " fixes common typos
   command W w
   command Wq wq
+  command Wqa wqa
   command Q q
+  command Qa qa
   map <F1> <Esc>
   imap <F1> <Esc>
 

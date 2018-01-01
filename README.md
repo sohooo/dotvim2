@@ -10,9 +10,11 @@ This setup is based on various sources all around github. Huge credits go to the
 
 ## Features
 
+- complete package with useful plugins, bindings and colorschemes
 - fully portable; place this `vimrc` anywhere you want
-- nicely structured `vimrc` config for easy extension/modification
-- distraction-free writing mode
+- nicely structured and fine-tuned `vimrc` config for easy extension/modification
+- enhanced markdown editing with folding, fenced code highlighting and TOC
+- distraction-free writing mode with focus on current paragraph
 
 
 ## Installation
@@ -60,6 +62,7 @@ Here's a list of some useful keyboard bindings:
 * `:Gdiff`    show diff
 * `:Gstatus`  toggle files with `-`
 
+
 ### Tabular
 
 * `,t=`  align =
@@ -67,6 +70,11 @@ Here's a list of some useful keyboard bindings:
 * `,tt`  align =>
 
 
+### Markdown
+
+* `:Toc`  display table of contents
+* `zm, zO, ...`  usual folding syntax
+*  fenced code blocks
 
 
 ## Other Tips
