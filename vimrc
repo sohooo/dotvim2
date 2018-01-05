@@ -81,7 +81,8 @@
   " endif
 
   if s:is_macvim
-    set guifont=Sauce\ Code\ Powerline:h13
+    " set guifont=Sauce\ Code\ Powerline:h13
+    set guifont=Sauce\ Code\ Powerline\ Light:h13  
     set transparency=1
 
     " Dash.app integration
@@ -333,19 +334,16 @@
 " code display
 " plugins and colorschemes that enhance code display {{{
   Plug 'tomasr/molokai'
-  Plug 'sonph/onehalf'
   Plug 'w0ng/vim-hybrid' " hybrid
   Plug 'morhetz/gruvbox'
-  Plug 'croaker/mustang-vim'
-  Plug 'godlygeek/csapprox'
-  Plug 'jasonlong/lavalamp'
+  Plug 'croaker/mustang-vim' " mustang
   Plug 'romainl/Apprentice' " apprentice
-  Plug 'jacoborus/tender.vim'
+  Plug 'jacoborus/tender.vim' "tender
   Plug 'gosukiwi/vim-atom-dark' " atom-dark
-  Plug 'noahfrederick/vim-hemisu'
-  Plug 'altercation/vim-colors-solarized'
-  Plug 'kristijanhusak/vim-hybrid-material'
-  Plug 'nanotech/jellybeans.vim' "{{{
+  Plug 'noahfrederick/vim-hemisu' " hemisu
+  Plug 'altercation/vim-colors-solarized' " solarized
+  Plug 'kristijanhusak/vim-hybrid-material' " hybrid*
+  Plug 'nanotech/jellybeans.vim' "{{{ 
     "let g:jellybeans_use_lowcolor_black = 0
   "}}}
 " }}}
