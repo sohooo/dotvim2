@@ -11,7 +11,7 @@ This setup is based on various sources all around github. Huge credits go to the
 ## Features
 
 - complete package with useful plugins, bindings and colorschemes
-- fully portable; place this `vimrc` anywhere you want
+- fully portable; place this package and `vimrc` anywhere you want
 - nicely structured and fine-tuned `vimrc` config for easy extension/modification
 - enhanced markdown editing with folding, fenced code highlighting and TOC
 - distraction-free writing mode with focus on current paragraph
@@ -19,9 +19,9 @@ This setup is based on various sources all around github. Huge credits go to the
 
 ## Installation
 
-1. Put this repo in a place you like: `git clone http://github.com/sohooo/dotvim.git ~/.dotvim`
+1. Put this repo in a place you like, for example: `git clone http://github.com/sohooo/dotvim2.git ~/.dotvim`
 2. Start Vim and install plugins: `vim -u ~/.dotvim/vimrc` , then: `:PlugInstall`
-3. Bonus: create an alias to use your Vim installation, like: `alias v='mvim -u ~/.dotvim/vimrc'`; this way, we don't interfere with the system Vim installation.
+3. Bonus: create an alias to use your Vim installation, like: `alias v='vim -u ~/.dotvim/vimrc'`; this way, we don't interfere with the system Vim installation.
 4. Enjoy!
 
 
