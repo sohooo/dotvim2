@@ -473,8 +473,8 @@
     "let g:goldenview__enable_at_startup = 0
     let g:goldenview__enable_default_mapping = 0
     nmap <leader>v <Plug>ToggleGoldenViewAutoResize
-    " dont resize markdown :Toc window
-    let g:goldenview__ignore_urule = { 'bufname': ['\[Location List\]'] }
+    " TODO: add to ignore_rule: dont resize markdown :Toc window
+    " let g:goldenview__ignore_urule = { 'bufname': ['\[Location List\]'] }
   "}}}
 "}}}
 
@@ -516,7 +516,7 @@ syntax enable
   " conditionally set colorscheme
   if s:is_unix && !s:is_macvim
     if $TERM == 'xterm-256color'
-      colorscheme jellybeans
+      colorscheme hybrid
     else
       let g:CSApprox_verbose_level=0
       colorscheme slate
