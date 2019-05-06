@@ -82,8 +82,11 @@
 
   if s:is_macvim
     " set guifont=Sauce\ Code\ Powerline:h13
-    set guifont=Sauce\ Code\ Powerline\ Light:h13  
-    set transparency=1
+    "set guifont=FiraCode-Regular:h14
+    " set guifont=Sauce\ Code\ Powerline\ Light:h13  
+    set guifont=Hasklig-Regular:h14
+    set macligatures
+    " set transparency=1
 
     " Dash.app integration
     Plug 'rizzatti/dash.vim'
@@ -218,21 +221,24 @@
   Plug 'tpope/vim-endwise'          "wisely add 'end' in ruby, etc
   Plug 'tpope/vim-ragtag'
   Plug 'tpope/vim-dispatch'
-  Plug 'vim-ruby/vim-ruby'
+  Plug 'andrewradev/splitjoin.vim'
   Plug 'jiangmiao/auto-pairs' "{{{
     au FileType markdown let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"'}
     au Filetype vim      let b:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'"}
   "}}}
 
+  Plug 'vim-ruby/vim-ruby'
   Plug 'mxw/vim-jsx'
   Plug 'elzr/vim-json'
   Plug 'tpope/vim-cucumber'
+  Plug 'rhysd/vim-crystal'
   Plug 'slim-template/vim-slim'
   Plug 'timcharper/textile.vim'
   Plug 'thoughtbot/vim-rspec'
   Plug 'ekalinin/Dockerfile.vim'
   Plug 'elixir-lang/vim-elixir'
   Plug 'tpope/vim-haml'
+  Plug 'fatih/vim-go'
   Plug 'pangloss/vim-javascript'
   Plug 'maksimr/vim-jsbeautify'
   Plug 'leafgarland/typescript-vim'
@@ -251,14 +257,19 @@
   Plug 'hdima/python-syntax'
   Plug 'klen/python-mode'
   Plug 'rodjek/vim-puppet'
-  Plug 'chase/vim-ansible-yaml'
+  Plug 'pearofducks/ansible-vim'
+  Plug 'sheerun/vim-polyglot'
 
 " rails
   Plug 'tpope/vim-bundler'
   Plug 'tpope/vim-rails'
   Plug 'kana/vim-textobj-user'
   Plug 'nelstrom/vim-textobj-rubyblock'
+
+" elixir
+  Plug 'slashmili/alchemist.vim'
 " }}}
+
 
 " completion
 " plugins that reduce typing and complete code {{{
@@ -333,14 +344,18 @@
 
 " code display
 " plugins and colorschemes that enhance code display {{{
+  Plug 'dracula/vim'
   Plug 'tomasr/molokai'
   Plug 'w0ng/vim-hybrid' " hybrid
   Plug 'morhetz/gruvbox'
+  Plug 'cocopon/iceberg.vim'
+  Plug 'wolf-dog/nighted.vim'
   Plug 'croaker/mustang-vim' " mustang
   Plug 'romainl/Apprentice' " apprentice
   Plug 'jacoborus/tender.vim' "tender
   Plug 'gosukiwi/vim-atom-dark' " atom-dark
   Plug 'noahfrederick/vim-hemisu' " hemisu
+  Plug 'danilo-augusto/vim-afterglow'
   Plug 'altercation/vim-colors-solarized' " solarized
   Plug 'kristijanhusak/vim-hybrid-material' " hybrid*
   Plug 'nanotech/jellybeans.vim' "{{{ 
@@ -368,17 +383,21 @@
   "Plug 'mhinz/vim-startify'         "fancy start screen for Vim
   "Plug 'gregsexton/gitv'            "gitk-like extension for vim-fugitive
   "Plug 'junegunn/vim-emoji'         ":smiley:
+  "
+  Plug 'janko-m/vim-test' "{{{
+    nmap <leader>tn :TestNearest<CR>
+    nmap <leader>tf :TestFile<CR>
+    nmap <leader>ts :TestSuite<CR>
+    nmap <leader>tl :TestLast<CR>
+    nmap <leader>tg :TestVisit<CR>
+  "}}}
   
   " autoclose tags
   Plug 'alvan/vim-closetag' "{{{
     let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.erb,*.jsx'
   "}}}
 
-  Plug 'junegunn/rainbow_parentheses.vim' "{{{
-    let g:rainbow#max_level = 16
-    " List of colors that you do not want. ANSI code or #RRGGBB
-    "let g:rainbow#blacklist = [233, 234]
-  "}}}
+  Plug 'luochen1990/rainbow'
 
   Plug 'bling/vim-airline' "{{{
     " enable powerline fonts on Mac
@@ -499,7 +518,7 @@
     let g:vim_markdown_emphasis_multiline = 0
     let g:vim_markdown_new_list_item_indent = 2
   "}}}
-
+  
   Plug 'justinmk/vim-sneak' "{{{
     "move to next 'ab' => sab (s modifier)
     let g:sneak#streak = 1
