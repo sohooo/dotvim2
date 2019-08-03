@@ -19,7 +19,7 @@
 " 2) create alias for nice use:
 "     alias v='mvim <path/to/vim/vimrc'
 " 3) happy VIMing!
-" 
+"
 "
 " Links
 " -----
@@ -83,7 +83,7 @@
   if s:is_macvim
     " set guifont=Sauce\ Code\ Powerline:h13
     "set guifont=FiraCode-Regular:h14
-    " set guifont=Sauce\ Code\ Powerline\ Light:h13  
+    " set guifont=Sauce\ Code\ Powerline\ Light:h13
     set guifont=Hasklig-Regular:h14
     set macligatures
     " set transparency=1
@@ -334,7 +334,7 @@
   Plug 'junegunn/limelight.vim' "{{{
     let g:limelight_default_coefficient = 0.7
   "}}}
-  
+
   " vim-orgmode setup; needs python
   "Plug 'jceb/vim-orgmode'
   "Plug 'vim-scripts/utl.vim'
@@ -356,9 +356,10 @@
   Plug 'gosukiwi/vim-atom-dark' " atom-dark
   Plug 'noahfrederick/vim-hemisu' " hemisu
   Plug 'danilo-augusto/vim-afterglow'
+  Plug 'arcticicestudio/nord-vim'  " nord
   Plug 'altercation/vim-colors-solarized' " solarized
   Plug 'kristijanhusak/vim-hybrid-material' " hybrid*
-  Plug 'nanotech/jellybeans.vim' "{{{ 
+  Plug 'nanotech/jellybeans.vim' "{{{
     "let g:jellybeans_use_lowcolor_black = 0
   "}}}
 " }}}
@@ -391,13 +392,39 @@
     nmap <leader>tl :TestLast<CR>
     nmap <leader>tg :TestVisit<CR>
   "}}}
-  
+
+  Plug 'ntpeters/vim-better-whitespace' "{{{
+    let g:better_whitespace_enabled=1
+    let g:strip_whitespace_on_save=1    " delete trailing whitespace on save
+    let g:strip_max_file_size=5000      " except for files above 5000 lines
+    let g:strip_whitespace_confirm=0    " disable confirmation dialog
+    let g:strip_only_modified_lines=0   " only look at modified lines
+  "}}}
+
   " autoclose tags
   Plug 'alvan/vim-closetag' "{{{
     let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.erb,*.jsx'
   "}}}
 
   Plug 'luochen1990/rainbow'
+
+  Plug 'TaDaa/vimade' "{{{
+    let g:vimade = {
+      \ "normalid": '',
+      \ "normalncid": '',
+      \ "basefg": '',
+      \ "basebg": '',
+      \ "fadelevel": 0.6,
+      \ "colbufsize": 15,
+      \ "rowbufsize": 15,
+      \ "checkinterval": 100,
+      \ "usecursorhold": 0,
+      \ "detecttermcolors": 0,
+      \ 'enablesigns': 0,
+      \ 'signsretentionperiod': 4000,
+      \ 'enablefocusfading': 0
+    \ }
+  "}}}
 
   Plug 'bling/vim-airline' "{{{
     " enable powerline fonts on Mac
@@ -443,7 +470,7 @@
     "}}}
   endif
 
-  Plug 'kien/ctrlp.vim' "{{{
+  Plug 'ctrlpvim/ctrlp.vim' "{{{
     nnoremap <leader>f :CtrlP<CR>
     nnoremap <Leader>b :CtrlPBuffer<CR>
 
@@ -518,7 +545,7 @@
     let g:vim_markdown_emphasis_multiline = 0
     let g:vim_markdown_new_list_item_indent = 2
   "}}}
-  
+
   Plug 'justinmk/vim-sneak' "{{{
     "move to next 'ab' => sab (s modifier)
     let g:sneak#streak = 1
