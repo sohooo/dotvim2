@@ -366,11 +366,16 @@
 
 " integrations
 " plugins that integrate Vim with external tools or the OS {{{
-  Plug 'scrooloose/syntastic' "{{{
+  Plug 'vim-syntastic/syntastic' "{{{
     let g:syntastic_error_symbol = '✗'
     let g:syntastic_style_error_symbol = '✠'
     let g:syntastic_warning_symbol = '∆'
     let g:syntastic_style_warning_symbol = '≈'
+
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_check_on_open = 1
+    let g:syntastic_check_on_wq = 0
   "}}}
 
 "}}}
@@ -515,13 +520,13 @@
     endif
   "}}}
 
-  Plug 'zhaocai/GoldenView.Vim' "{{{
-    "let g:goldenview__enable_at_startup = 0
-    let g:goldenview__enable_default_mapping = 0
-    nmap <leader>v <Plug>ToggleGoldenViewAutoResize
-    " TODO: add to ignore_rule: dont resize markdown :Toc window
-    " let g:goldenview__ignore_urule = { 'bufname': ['\[Location List\]'] }
-  "}}}
+  " Plug 'zhaocai/GoldenView.Vim' "{{{
+  "   "let g:goldenview__enable_at_startup = 0
+  "   let g:goldenview__enable_default_mapping = 0
+  "   nmap <leader>v <Plug>ToggleGoldenViewAutoResize
+  "   " TODO: add to ignore_rule: dont resize markdown :Toc window
+  "   let g:goldenview__ignore_urule = { 'bufname': ['\[Location List\]'] }
+  " "}}}
 "}}}
 
 " commands
