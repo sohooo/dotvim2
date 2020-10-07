@@ -61,7 +61,7 @@
   set ruler              " Ruler on
   set number             " Line numbers on
   set laststatus=2       " Always show the statusline
-  set cmdheight=2
+  set cmdheight=1        " height of commandbar
   set notitle            " set terminal's title
   set scrolloff=3        " show 3 lines of context around cursor
   set showmode           " display mode you're in
@@ -366,6 +366,8 @@
 
 " integrations
 " plugins that integrate Vim with external tools or the OS {{{
+  " FIXME: replace with `ale` on Vim 8
+  " https://github.com/dense-analysis/ale
   Plug 'vim-syntastic/syntastic' "{{{
     let g:syntastic_error_symbol = '✗'
     let g:syntastic_style_error_symbol = '✠'
