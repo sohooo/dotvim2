@@ -1,6 +1,6 @@
 " =========================================
 " Who:   Sven Sporer | sohooo
-" Where: https://github.com/sohooo/dotvim
+" Where: https://github.com/sohooo/dotvim2
 " =========================================
 " vim: fdm=marker ts=2 sts=2 sw=2 fdl=0
 
@@ -17,7 +17,7 @@
 "     vim -u vimrc
 "     :PlugInstall
 " 2) create alias for nice use:
-"     alias v='mvim <path/to/vim/vimrc'
+"     alias v='mvim /path/to/vimrc'
 " 3) happy VIMing!
 "
 "
@@ -520,12 +520,25 @@
     endif
   "}}}
 
+  Plug 'camspiers/lens.vim' "{{{
+    " for animation
+    Plug 'camspiers/animate.vim'
+
+    " let g:lens#disabled = 1
+    " let g:lens#animate = 0
+    let g:lens#disabled_filetypes = ['nerdtree', 'fzf']
+
+    " let g:lens#height_resize_max = 20
+    " let g:lens#height_resize_min = 5
+    " let g:lens#width_resize_max = 80
+    " let g:lens#width_resize_min = 20
+  "}}}
   " Plug 'zhaocai/GoldenView.Vim' "{{{
   "   "let g:goldenview__enable_at_startup = 0
   "   let g:goldenview__enable_default_mapping = 0
   "   nmap <leader>v <Plug>ToggleGoldenViewAutoResize
   "   " TODO: add to ignore_rule: dont resize markdown :Toc window
-  "   let g:goldenview__ignore_urule = { 'bufname': ['\[Location List\]'] }
+  "   " let g:goldenview__ignore_urule = { 'bufname': ['\[Location List\]'] }
   " "}}}
 "}}}
 
