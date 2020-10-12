@@ -273,10 +273,16 @@
 
 " completion
 " plugins that reduce typing and complete code {{{
-  Plug 'Shougo/neocomplcache.vim' "{{{
-    let g:neocomplcache_enable_at_startup=1
-    let g:neocomplcache_enable_fuzzy_completion=1
-  "}}}
+  " a fast one
+  Plug 'ajh17/VimCompletesMe' "{{{
+  " "}}}
+
+  " vim 7.x compatible, but slower
+  " Plug 'Shougo/neocomplcache.vim' "{{{
+  "   let g:neocomplcache_enable_at_startup=1
+  "   let g:neocomplcache_enable_fuzzy_completion=0
+  "   let g:neocomplcache_min_syntax_length = 3
+  " "}}}
 
   " modern
   "Plug 'Valloric/YouCompleteMe' "{{{
@@ -511,7 +517,7 @@
     let g:indent_guides_start_level=1
     let g:indent_guides_guide_size=1
     let g:indent_guides_enable_on_vim_startup=1
-    let g:indent_guides_color_change_percent=2
+    let g:indent_guides_color_change_percent=5
     if !has('gui_running')
       let g:indent_guides_auto_colors=0
       function! s:indent_set_console_colors()
@@ -524,7 +530,7 @@
 
   Plug 'camspiers/lens.vim' "{{{
     " for animation
-    Plug 'camspiers/animate.vim'
+    " Plug 'camspiers/animate.vim'
 
     " let g:lens#disabled = 1
     " let g:lens#animate = 0
