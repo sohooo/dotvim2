@@ -485,6 +485,11 @@
       let g:gitgutter_enabled = 1
       let g:gitgutter_realtime = 1
       let g:gitgutter_eager = 1
+
+      " nmap ]c <Plug>GitGutterNextHunk
+      " nmap [c <Plug>GitGutterPrevHunk
+      " nmap <Leader>hs <Plug>GitGutterStageHunk
+      " nmap <Leader>hu <Plug>GitGutterUndoHunk
     "}}}
   endif
 
