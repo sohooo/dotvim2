@@ -70,8 +70,8 @@
   set antialias          " MacVim: smooth fonts
   set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
   set fillchars=diff:⣿,vert:│
-  "set showbreak=↪
-
+  " set showbreak=↪
+  "
   set nobackup
   set noswapfile
 
@@ -102,8 +102,9 @@
   elseif s:is_windows
      " Windows
     set guifont=Consolas:h10:cANSI
-    set guioptions-=T " Toolbar
-    set guioptions-=m " Menubar
+    set guioptions-=T " disable: include Toolbar
+    set guioptions-=m " disable: Menu bar is present
+    set guioptions-=r " disable: right-hand scrollbar always present
 
     " Set height and width on Windows
     set lines=60
@@ -350,6 +351,9 @@
 
 " code display
 " plugins and colorschemes that enhance code display {{{
+  Plug 'mhartington/oceanic-next'   " OceanicNext; airline: oceanicnext
+  Plug 'joshdick/onedark.vim'       " onedark; +airline
+  Plug 'cocopon/iceberg.vim'        " iceberg; +airline
   Plug 'dracula/vim'
   Plug 'tomasr/molokai'
   Plug 'w0ng/vim-hybrid' " hybrid
@@ -440,6 +444,7 @@
   "}}}
 
   Plug 'bling/vim-airline' "{{{
+    let g:airline_theme='iceberg'
     " enable powerline fonts on Mac
     if s:is_macvim
       let g:airline_powerline_fonts=1
@@ -460,14 +465,14 @@
   Plug 'scrooloose/nerdtree' "{{{
   Plug 'jistr/vim-nerdtree-tabs'
   Plug 'Xuyuanp/nerdtree-git-plugin'
-    let NERDTreeShowHidden=1
-    let NERDTreeQuitOnOpen=0
-    let NERDTreeShowLineNumbers=1
-    let NERDTreeHighlightCursorline=1
-    let NERDTreeDirArrows=1
     let NERDTreeChDirMode=0
-    let NERDTreeShowBookmarks=1
-    let NERDTreeIgnore=['\.git','\.hg']
+    let NERDTreeDirArrows=1
+    let NERDTreeHighlightCursorline=1
+    let NERDTreeIgnore=['\.git$','\.hg']
+    let NERDTreeQuitOnOpen=0
+    let NERDTreeShowBookmarks=0
+    let NERDTreeShowHidden=1
+    let NERDTreeShowLineNumbers=0
     nnoremap <leader>d :NERDTreeToggle<CR>
   "}}}
 
@@ -556,6 +561,10 @@
   Plug 'tpope/vim-unimpaired'       "pairs of handy bracket mappings
   Plug 'tpope/vim-repeat'           "enable repeating supported plugin
 
+  Plug 'roxma/vim-paste-easy' "{{{
+    " let g:paste_easy_enable=0     " disable auto-paste mode
+  "}}}
+
   Plug 'godlygeek/tabular' "{{{
     nmap <leader>t= :Tabularize /=<CR>
     vmap <leader>t= :Tabularize /=<CR>
@@ -588,13 +597,15 @@ syntax enable
   " conditionally set colorscheme
   if s:is_unix && !s:is_macvim
     if $TERM == 'xterm-256color'
-      colorscheme hybrid
+      colorscheme iceberg
+      " colorscheme hybrid
     else
       let g:CSApprox_verbose_level=0
       colorscheme slate
     endif
   else
-    colorscheme hybrid
+    colorscheme iceberg
+    " colorscheme hybrid
     " colorscheme solarized
     " colorscheme mustang
     " colorscheme molokai
