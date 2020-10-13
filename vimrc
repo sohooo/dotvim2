@@ -1,5 +1,5 @@
 " =========================================
-" Who:   Sven Sporer | sohooo
+" Who:   Sven Sporer <<||>> sohooo
 " Where: https://github.com/sohooo/dotvim2
 " =========================================
 " vim: fdm=marker ts=2 sts=2 sw=2 fdl=0
@@ -43,11 +43,19 @@
   let s:portable = expand('<sfile>:p:h')
 
   " add the directory to 'runtimepath'
+  " various paths
+  let g:mods   = s:portable . '/mods'       " local modifications
+  let g:readme = s:portable . '/README.md'  " README.md of this project
+  let g:vimrc  = expand('<sfile>')          " this vimrc
+
   let &runtimepath = printf('%s,%s,%s/after,%s/bundle/Plug.vim', s:portable, &runtimepath, s:portable, s:portable)
 
   " Plugins managed by vim-plug: https://github.com/junegunn/vim-plug
   " Tell vim-plug where to put plugins: /path_of_this_file/bundle
   call plug#begin(printf('%s/bundle', s:portable))
+
+  " load local ./mods
+  Plug printf('%s/logfile', g:mods)
 " }}}
 
 " detect OS {{{
@@ -115,7 +123,9 @@
   endif
 
   syntax enable
-  " set t_Co=256           " number of supported colors
+  set t_ti=
+  set t_te=
+  set t_Co=256           " number of supported colors
   set autoread           " Automatically reload changes if detected
   set wildmenu           " Turn on WiLd menu
   set hidden             " Change buffer - without saving
@@ -123,7 +133,7 @@
   set cf                 " Enable error files & error jumping.
   set clipboard+=unnamed " Yanks go on clipboard instead.
   set autowrite          " Writes on make/shell commands
-  set timeoutlen=250     " Time to wait for a command (after leader for example)
+  set timeoutlen=2500    " Time to wait for a command (after leader for example)
   set foldlevel=0        " enable folding
   set foldlevelstart=99  " Open all folds on start
   set formatoptions=crql
@@ -137,7 +147,7 @@
   set matchtime=2        " How many tenths of a second to blink
 
   set noerrorbells
-  set visualbell         "disables beep in macvim
+  set visualbell         " disables beep in macvim
   set t_vb=
 
   set mousehide  " Hide mouse after chars typed
@@ -147,13 +157,12 @@
   set complete=.,w,b,u,U
 
   set tabstop=2
-  set backspace=2 " Delete everything with backspace
+  set backspace=2   " Delete everything with backspace
   set shiftwidth=2  " Tabs under smart indent
   set cindent
   set autoindent
   set smarttab
   set expandtab
-  set backspace=2
 " }}}
 
 " bindings {{{
@@ -161,6 +170,12 @@
   nmap <silent> <leader>s :set spell!<CR>
   nmap <silent> <leader>vim :e <sfile><CR>
   nmap <leader>u :syntax sync fromstart<cr>:redraw!<cr>
+
+  " jenkins pipeline linting for .groovy files
+  au FileType groovy nmap <leader>l :!ssh -l $GIT_AUTHOR_NAME -p 58888 JENKINS_HOST declarative-linter < %<cr>
+
+  " puppet syntax linting
+  au FileType puppet nmap <leader>l :!puppet-lint %<cr>
 
   " window movement
   nmap <silent> <C-h> :wincmd h<CR>
@@ -196,6 +211,10 @@
   " toggle line numbers
   map <F10> :set number!<cr>:set number?<cr>
 
+  " display help with 'K'
+  au BufReadPost *.rb set keywordprg=ri
+  au BufReadPost *.pp set keywordprg=puppet\ describe
+
   " easy tab switching
   nmap tt :tabnext<cr>
   map  tt :tabnext<cr>
@@ -214,6 +233,10 @@
 
   " force saving files that require root permission
   cmap w!! %!sudo tee > /dev/null %
+
+  " show README to help with bindings
+  nmap <silent><leader>h   :exe ":tabnew ". g:readme<cr>
+  nmap <silent><leader>vim :exe ":tabnew ". g:vimrc<cr>
 "}}}
 
 " language
@@ -228,7 +251,6 @@
     au Filetype vim      let b:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'"}
   "}}}
 
-  Plug 'vim-ruby/vim-ruby'
   Plug 'mxw/vim-jsx'
   Plug 'elzr/vim-json'
   Plug 'tpope/vim-cucumber'
@@ -241,7 +263,6 @@
   Plug 'tpope/vim-haml'
   Plug 'fatih/vim-go'
   Plug 'pangloss/vim-javascript'
-  Plug 'maksimr/vim-jsbeautify'
   Plug 'leafgarland/typescript-vim'
   Plug 'kchmck/vim-coffee-script'
   Plug 'mmalecki/vim-node.js'
@@ -256,10 +277,17 @@
   Plug 'hail2u/vim-css3-syntax'
   Plug 'ap/vim-css-color'
   Plug 'hdima/python-syntax'
-  Plug 'klen/python-mode'
   Plug 'rodjek/vim-puppet'
   Plug 'pearofducks/ansible-vim'
   Plug 'sheerun/vim-polyglot'
+
+" ruby
+  Plug 'vim-ruby/vim-ruby'
+  Plug 'ruby-formatter/rufo-vim' "{{{
+    let g:rufo_auto_formatting = 0
+    let g:rufo_errors_buffer_position = 'bottom'
+    let g:rufo_silence_errors = 0
+  "}}}
 
 " rails
   Plug 'tpope/vim-bundler'
@@ -269,21 +297,27 @@
 
 " elixir
   Plug 'slashmili/alchemist.vim'
-" }}}
 
+" go
+  Plug 'fatih/vim-go' "{{{
+    let g:go_version_warning = 0
+  " }}}
+
+" }}}
 
 " completion
 " plugins that reduce typing and complete code {{{
   " a fast one
-  Plug 'ajh17/VimCompletesMe' "{{{
+  " Plug 'ajh17/VimCompletesMe' "{{{
   " "}}}
 
-  " vim 7.x compatible, but slower
-  " Plug 'Shougo/neocomplcache.vim' "{{{
-  "   let g:neocomplcache_enable_at_startup=1
-  "   let g:neocomplcache_enable_fuzzy_completion=0
-  "   let g:neocomplcache_min_syntax_length = 3
-  " "}}}
+  " vim 7.x compatible, but a bit slower
+  Plug 'Shougo/neocomplcache.vim' "{{{
+    let g:neocomplcache_enable_at_startup=1
+    let g:neocomplcache_enable_fuzzy_completion=1
+    inoremap <expr><C-j>   pumvisible() ? "\<C-n>" : "\<C-h>"
+    inoremap <expr><c-k>   pumvisible() ? "\<C-p>" : "\<C-h>"
+  "}}}
 
   " modern
   "Plug 'Valloric/YouCompleteMe' "{{{
@@ -383,11 +417,26 @@
     let g:syntastic_style_error_symbol = '✠'
     let g:syntastic_warning_symbol = '∆'
     let g:syntastic_style_warning_symbol = '≈'
+    " choose latest rubies as interpreter
+    let s:rubies = '/opt/rubies'
+    let s:rubies_261 = s:rubies . '/ruby-2.6.1/bin/ruby'
+    let s:rubies_260 = s:rubies . '/ruby-2.6.0/bin/ruby'
+    let s:rubies_238 = s:rubies . '/ruby-2.3.8/bin/ruby'
+    let s:rubies_222 = s:rubies . '/ruby-2.2.2/bin/ruby'
+    let s:rubies_latest = s:rubies_261
 
-    let g:syntastic_always_populate_loc_list = 1
-    let g:syntastic_auto_loc_list = 1
-    let g:syntastic_check_on_open = 1
-    let g:syntastic_check_on_wq = 0
+    if filereadable(s:rubies_latest)
+      let g:syntastic_ruby_mri_exec = s:rubies_latest
+    elseif filereadable(s:rubies_260)
+      let g:syntastic_ruby_mri_exec = s:rubies_260
+    elseif filereadable(s:rubies_238)
+      let g:syntastic_ruby_mri_exec = s:rubies_238
+    elseif filereadable(s:rubies_222)
+      let g:syntastic_ruby_mri_exec = s:rubies_222
+    else
+      "use system rubies"
+      let g:syntastic_ruby_mri_exec = 'ruby'
+    endif
   "}}}
 
 "}}}
@@ -410,13 +459,8 @@
     nmap <leader>tg :TestVisit<CR>
   "}}}
 
-  Plug 'ntpeters/vim-better-whitespace' "{{{
-    let g:better_whitespace_enabled=1
-    let g:strip_whitespace_on_save=1    " delete trailing whitespace on save
-    let g:strip_max_file_size=5000      " except for files above 5000 lines
-    let g:strip_whitespace_confirm=0    " disable confirmation dialog
-    let g:strip_only_modified_lines=0   " only look at modified lines
-  "}}}
+    let test#ruby#rspec#executable = './rspec'
+    let test#ruby#cucumber#executable = './cucumber'
 
   " autoclose tags
   Plug 'alvan/vim-closetag' "{{{
@@ -469,6 +513,7 @@
     let NERDTreeDirArrows=1
     let NERDTreeHighlightCursorline=1
     let NERDTreeIgnore=['\.git$','\.hg']
+    let g:NERDTreeMinimalUI=1
     let NERDTreeQuitOnOpen=0
     let NERDTreeShowBookmarks=0
     let NERDTreeShowHidden=1
@@ -551,6 +596,7 @@
     " let g:lens#width_resize_max = 80
     " let g:lens#width_resize_min = 20
   "}}}
+
   " Plug 'zhaocai/GoldenView.Vim' "{{{
   "   "let g:goldenview__enable_at_startup = 0
   "   let g:goldenview__enable_default_mapping = 0
@@ -562,9 +608,9 @@
 
 " commands
 " plugins that introduce or change a Vim command {{{
-  Plug 'tomtom/tcomment_vim'        "An extensible & universal comment vim-plugin
-  Plug 'tpope/vim-unimpaired'       "pairs of handy bracket mappings
-  Plug 'tpope/vim-repeat'           "enable repeating supported plugin
+  Plug 'tomtom/tcomment_vim'        " An extensible & universal comment vim-plugin
+  Plug 'tpope/vim-unimpaired'       " pairs of handy bracket mappings
+  Plug 'tpope/vim-repeat'           " enable repeating supported plugin
 
   Plug 'roxma/vim-paste-easy' "{{{
     " let g:paste_easy_enable=0     " disable auto-paste mode
@@ -580,8 +626,9 @@
     nmap <leader>tt :Tabularize /=>\zs<CR>
     vmap <leader>tt :Tabularize /=>\zs<CR>
   "}}}
+
   Plug 'plasticboy/vim-markdown' "{{{
-    let g:vim_markdown_toc_autofit = 0
+    let g:vim_markdown_toc_autofit = 1
     let g:vim_markdown_emphasis_multiline = 0
     let g:vim_markdown_new_list_item_indent = 2
   "}}}
@@ -590,6 +637,69 @@
     "move to next 'ab' => sab (s modifier)
     let g:sneak#streak = 1
   "}}}
+"}}}
+
+" functions
+" functions to change the behaviour of Vim {{{
+
+  " show trailing whitespace
+  let g:show_trailing_whitespace=0
+  function ToggleTrailingWhitespace ()
+    if g:show_trailing_whitespace
+      let g:show_trailing_whitespace=0
+      match ExtraWhitespace //
+    else
+      let g:show_trailing_whitespace=1
+      highlight ExtraWhitespace ctermbg=red guibg=red
+      match ExtraWhitespace /\s\+$/
+    endif
+  endfunction
+
+  map <leader>s :call ToggleTrailingWhitespace()<cr>
+
+  " script to toggle colors and colorscheme
+  function ToggleColorSettings ()
+    if (&t_Co == 8)
+      set t_Co=256
+      colorscheme hybrid
+      echo "enjoy the funky colors!"
+    else
+      set t_Co=8
+      colorscheme default
+      echo "boring colors on now"
+    endif
+  endfunction
+
+  map <leader>c :call ToggleColorSettings()<cr>
+
+  " functions to toggle active plugins
+  let g:plugenabled=1
+  function! PluginToggle()
+    if g:plugenabled
+       let g:plugenabled=0
+       GitGutterDisable
+       set nonumber
+       if exists('#airline')
+         AirlineToggle
+       endif
+       echom "Plugins disabled"
+     else
+       let g:plugenabled=1
+       GitGutterEnable
+       if !exists('#airline')
+        AirlineToggle
+       endif
+       set number
+       echom "Plugins enabled"
+     endif
+  endfunction
+
+  nnoremap <leader>x :call PluginToggle()<cr>
+
+  " Toggle NeoComplCache
+  nmap <F11> :NeoComplCacheToggle <cr>
+  imap <F11>  <c-o><F11>
+
 "}}}
 
 call plug#end()
