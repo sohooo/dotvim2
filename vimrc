@@ -439,6 +439,10 @@
     endif
   "}}}
 
+  Plug 'christoomey/vim-tmux-navigator' "{{{
+
+  "}}}
+
 "}}}
 
 " interface
@@ -469,23 +473,23 @@
 
   Plug 'luochen1990/rainbow'
 
-  Plug 'TaDaa/vimade' "{{{
-    let g:vimade = {
-      \ "normalid": '',
-      \ "normalncid": '',
-      \ "basefg": '',
-      \ "basebg": '',
-      \ "fadelevel": 0.6,
-      \ "colbufsize": 15,
-      \ "rowbufsize": 15,
-      \ "checkinterval": 100,
-      \ "usecursorhold": 0,
-      \ "detecttermcolors": 0,
-      \ 'enablesigns': 0,
-      \ 'signsretentionperiod': 4000,
-      \ 'enablefocusfading': 0
-    \ }
-  "}}}
+  " Plug 'TaDaa/vimade' "{{{
+  "   let g:vimade = {
+  "     \ "normalid": '',
+  "     \ "normalncid": '',
+  "     \ "basefg": '',
+  "     \ "basebg": '',
+  "     \ "fadelevel": 0.6,
+  "     \ "colbufsize": 15,
+  "     \ "rowbufsize": 15,
+  "     \ "checkinterval": 100,
+  "     \ "usecursorhold": 0,
+  "     \ "detecttermcolors": 0,
+  "     \ 'enablesigns': 0,
+  "     \ 'signsretentionperiod': 4000,
+  "     \ 'enablefocusfading': 0
+  "   \ }
+  " "}}}
 
   Plug 'bling/vim-airline' "{{{
     let g:airline_theme='iceberg'
