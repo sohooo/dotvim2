@@ -20,7 +20,7 @@ This setup is based on various sources all around github. Huge credits go to the
 ## Installation
 
 1. Put this repo in a place you like, for example: `git clone http://github.com/sohooo/dotvim2.git ~/.dotvim`
-2. Start Vim and install plugins: `vim -u ~/.dotvim/vimrc` , then: `:PlugInstall`
+2. Start Vim and install plugins: `vim -u ~/.dotvim/vimrc -c PlugInstall`
 3. Bonus: create an alias to use your Vim installation, like: `alias v='vim -u ~/.dotvim/vimrc'`; this way, we don't interfere with the system Vim installation.
 4. Enjoy!
 
