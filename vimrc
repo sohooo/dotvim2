@@ -298,6 +298,11 @@
 " elixir
   Plug 'slashmili/alchemist.vim'
 
+" rust
+  Plug 'rust-lang/rust.vim' "{{{
+    let g:rustfmt_autosave = 1
+  "}}}
+
 " go
   Plug 'fatih/vim-go' "{{{
     let g:go_version_warning = 0
